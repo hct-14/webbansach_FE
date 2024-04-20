@@ -1,12 +1,12 @@
 class HinhAnhModel{
-    maHinhAnh: number;
+    maHinhAnh: string;
     tenHinhAnh?: string;
     laIcon?:boolean;
     duongDan?:string;
     duLieuAnh?:string;
 
 
-constructor(maHinhAnh:number, tenHinhAnh:string, laIcon:boolean, duongDan:string, duLieuAnh:string){
+constructor(maHinhAnh:string, tenHinhAnh:string, laIcon:boolean, duongDan:string, duLieuAnh:string){
     this.maHinhAnh=maHinhAnh;
     this.tenHinhAnh=tenHinhAnh;
     this.laIcon=laIcon;

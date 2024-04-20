@@ -5,12 +5,13 @@ import { layToanBoSach, timKiemSach } from "../api/SachAPI";
 import { error } from "console";
 import PhanTrang from "../utils/PhanTrang";
 
-interface DanhSachSanPhamProps{
-    tuKhoaTimKiem:string;
-    maTheLoai:number;
+
+interface DanhSachSanPhamProps {
+    tuKhoaTimKiem: string;
+    maTheLoai: number;
 }
 
-function DanhSachSanPham ({tuKhoaTimKiem, maTheLoai}:DanhSachSanPhamProps){
+function DanhSachSanPham({ tuKhoaTimKiem, maTheLoai }: DanhSachSanPhamProps) {
 
     const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
@@ -18,11 +19,6 @@ function DanhSachSanPham ({tuKhoaTimKiem, maTheLoai}:DanhSachSanPhamProps){
     const [trangHienTai, setTrangHienTai] = useState(1);
     const [tongSoTrang, setTongSoTrang] = useState(0);
     const [tongSoSach, setSoSach] = useState(0);
-
-
-    console.log("trang hien tai", trangHienTai);
-    console.log("ma the loai",maTheLoai);
-
 
     useEffect(() => {
         if (tuKhoaTimKiem === '' && maTheLoai==0) {
@@ -52,14 +48,13 @@ function DanhSachSanPham ({tuKhoaTimKiem, maTheLoai}:DanhSachSanPhamProps){
                 }
             );
         }
-        
-    }, 
-    [trangHienTai, tuKhoaTimKiem, maTheLoai]);
+    }, [trangHienTai, tuKhoaTimKiem, maTheLoai]);
 
-    const phanTrang = (trangHienTai: number) => {
-        setTrangHienTai(trangHienTai);
+    const phanTrang = (trang: number) => {
+        setTrangHienTai(trang);
     };
 
+    //console.log(trangHienTai);
 
     if (dangTaiDuLieu) {
         return (
@@ -77,13 +72,13 @@ function DanhSachSanPham ({tuKhoaTimKiem, maTheLoai}:DanhSachSanPhamProps){
         );
     }
 
+
     if(danhSachQuyenSach.length===0){
         return (
             <div className="container">
-                <div className="row mt-4 mb-4">
-                    <h1>mày tìm cái đéo gì thế</h1>
+                <div className="d-flex align-items-center justify-content-center">
+                    <h1>Hiện không tìm thấy sách theo yêu cầu!</h1>
                 </div>
-                {/* <PhanTrang trangHienTai={trangHienTai} tongSoTrang={tongSoTrang} phanTrang={phanTrang}/> */}
             </div>
         );
     }
@@ -98,7 +93,7 @@ function DanhSachSanPham ({tuKhoaTimKiem, maTheLoai}:DanhSachSanPhamProps){
                     )
                 }
             </div>
-            <PhanTrang trangHienTai={trangHienTai} tongSoTrang={tongSoTrang} phanTrang={phanTrang}/>
+            <PhanTrang trangHienTai={trangHienTai} tongSoTrang={tongSoTrang} phanTrang={phanTrang} />
         </div>
     );
 }

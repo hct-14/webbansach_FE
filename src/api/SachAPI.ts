@@ -73,4 +73,45 @@ export async function timKiemSach(tuKhoaTimKiem:string, maTheLoai:number): Promi
 
 }
 
+export async function laySachTheoMaSach(maSach:number): Promise<SachModel | null> {
+    const duongDan = `http://localhost:8080/sach/${maSach}`
+    // let ketQua: SachModel;
+
+    try {
+
+        const response = await fetch(duongDan);
+        if(!response.ok){
+            throw new Error("gap loi chitietsp roi em oi");
+        }
+
+        const sachData = await response.json();
+        console.log("sachdata: ", sachData);
+
+        if(sachData){ 
+            console.log("sachdata ne em: ")
+
+            return{    
+                maSach:sachData.maSach,
+                tenSach:sachData.tenSach,
+                giaBan:sachData.giaBan,
+                giaNiemYet:sachData.giaNiemYet,
+                moTa:sachData.moTa,
+                soLuong:sachData.soLuong,
+                tenTacGia:sachData.tenTacGia,
+                trungBinhXepHang:sachData.trungBinhXepHang
+             
+            }}
+            else{
+                throw new Error('sach khong ton tai');
+            }
+        }catch(error){
+            // console.log("sachdata ne em: ")
+
+            console.log("loi roi em ei", error);
+            return null;
+        }
+
+    }
+
+
 
