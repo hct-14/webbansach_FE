@@ -1,42 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { my_request } from "../../api/Request";
+import SachModel from "../../models/SachModel";
+import HinhAnhModel from "../../models/HinhAnhModel";
+// import { laySachMoi, laysachmoi } from "../../api/SachAPI";
+import { error } from "console";
+import CarouselItem from "./CarouselItem";
+import { laySachMoi } from "../../api/SachAPI";
 
-function Carousel() {
+
+const Carousel: React.FC = () => {
+    const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
+    const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
+    const [baoLoi, setBaoLoi] = useState(null);
+
+
+    useEffect(() => {
+        laySachMoi().then(
+            kq => {
+                setDanhSachQuyenSach(kq.ketQua);
+                setDangTaiDuLieu(false);
+            }
+        ).catch(
+            error => {
+                setDangTaiDuLieu(false);
+                setBaoLoi(error.message);
+            }
+        );
+    }, [] // Chi goi mot lan
+    )
+
+    if (dangTaiDuLieu) {
+        return (
+            <div>
+                <h1>Đang tải dữ liệu</h1>
+            </div>
+        );
+    }
+
+    if (baoLoi) {
+        return (
+            <div>
+                <h1>Gặp lỗi: {baoLoi}</h1>
+            </div>
+        );
+    }
+
+
     return (
         <div>
             <div id="carouselExampleDark" className="carousel carousel-dark slide">
                 <div className="carousel-inner">
                     <div className="carousel-item active" data-bs-interval="10000">
-                        <div className="row align-items-center">
-                            <div className="col-5 text-center">
-                                <img src={'./../../images/books/1.jpg'} className="float-end" style={{width:'150px'}} />
-                            </div>
-                            <div className="col-7">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
+                    <CarouselItem key={0} sach={danhSachQuyenSach[0]} />
                     </div>
                     <div className="carousel-item " data-bs-interval="10000">
-                        <div className="row align-items-center">
-                            <div className="col-5 text-center">
-                                <img src={'./../../images/books/2.jpg'} className="float-end" style={{width:'150px'}} />
-                            </div>
-                            <div className="col-7">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
+                    <CarouselItem key={1} sach={danhSachQuyenSach[1]} />
                     </div>
                     <div className="carousel-item " data-bs-interval="10000">
-                        <div className="row align-items-center">
-                            <div className="col-5 text-center">
-                                <img src={('./../../images/books/3.jpg')} className="float-end" style={{width:'150px'}} />
-                            </div>
-                            <div className="col-7">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
+                        <CarouselItem key={3} sach={danhSachQuyenSach[2]} />
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">

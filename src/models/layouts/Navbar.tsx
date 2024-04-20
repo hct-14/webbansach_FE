@@ -1,21 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-interface NavbarProps{
-    tuKhoaTimKiem: string;
-    setTuKhoaTimKiem: (tuKhoa:string) => void;
-}
-
-function Navbar({tuKhoaTimKiem, setTuKhoaTimKiem}:NavbarProps){
-
-
-    const [tuKhoaTamThoi, setTuKhoaTamThoi] = useState('');
-    const onSearchInoutChange = (e: ChangeEvent<HTMLInputElement>) =>{
-        setTuKhoaTamThoi(e.target.value);
-    }
-    const handleSearch = () =>{
-        setTuKhoaTimKiem(tuKhoaTamThoi);
-    }
+function Navbar(){
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
@@ -29,27 +15,26 @@ function Navbar({tuKhoaTimKiem, setTuKhoaTimKiem}:NavbarProps){
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="#">Trang chủ</a>
               </li>
-              {/* <li className="nav-item dropdown">
+              <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Thể loại sách
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
-                  <li><a className="dropdown-item" href="1">Thể loại 1</a></li>
-                  <li><a className="dropdown-item" href="2">Thể loại 2</a></li>
-                  <li><a className="dropdown-item" href="3">Thể loại 3</a></li>
+                  <li><a className="dropdown-item" href="/1">Thể loại 1</a></li>
+                  <li><a className="dropdown-item" href="/2">Thể loại 2</a></li>
+                  <li><a className="dropdown-item" href="/3">Thể loại 3</a></li>
                 </ul>
-              </li> */}
-
-                        <li className="nav-item dropdown">
-            <Link className="nav-link dropdown-toggle" id="navbarDropdown1" to="/#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Thể loại sách
-            </Link>
-            <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
-              <li><Link className="dropdown-item" to="/1">Thể loại 1</Link></li>
-              <li><Link className="dropdown-item" to="/2">Thể loại 2</Link></li>
-              <li><Link className="dropdown-item" to="/3">Thể loại 3</Link></li>
-            </ul>
-          </li>
+              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Thể loại sách
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
+                <li><Link className="dropdown-item" to="/1">Thể loại 1</Link></li>
+                <li><Link className="dropdown-item" to="/2">Thể loại 2</Link></li>
+                <li><Link className="dropdown-item" to="/3">Thể loại 3</Link></li>
+              </ul>
+              </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Quy định bán hàng
@@ -67,10 +52,10 @@ function Navbar({tuKhoaTimKiem, setTuKhoaTimKiem}:NavbarProps){
           </div>
   
           {/* Tìm kiếm */}
-          <div className="d-flex">
-            <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" onChange={onSearchInoutChange} value={tuKhoaTamThoi} />
-            <button className="btn btn-outline-success" type="button" onClick={handleSearch}>Search</button>
-          </div>
+          <form className="d-flex">
+            <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
+            <button className="btn btn-outline-success" type="submit">Search</button>
+          </form>
   
           {/* Biểu tượng giỏ hàng */}
           <ul className="navbar-nav me-1">
