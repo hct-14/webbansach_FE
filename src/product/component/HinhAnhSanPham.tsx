@@ -4,6 +4,7 @@ import { error } from "console";
 import HinhAnhModel from "../../models/HinhAnhModel";
 import { Carousel } from "react-responsive-carousel";
 import { lay1DanhGiaCuaMotSach, layToanBoDanhGiaCuaMotSach } from "../../api/DanhGiaAPI";
+import "react-responsive-carousel/lib/styles/carousel.min.css" ;
 
 
 interface HinhAnhSanPham {
@@ -17,19 +18,19 @@ const HinhAnhSanPham: React.FC<HinhAnhSanPham> = (props) => {
     const [danhSachAnh, setDanhSachAnh] = useState<HinhAnhModel[]>([]);
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
     const [baoLoi, setBaoLoi] = useState(null);
-    const [hinhAnhDangChon, setHinhAnhDangChon] = useState<HinhAnhModel | null>(null);
+    // const [hinhAnhDangChon, setHinhAnhDangChon] = useState<HinhAnhModel | null>(null);
 
-    const chonAnh = (hinhAnh: HinhAnhModel) => {
-        setHinhAnhDangChon(hinhAnh);
-    }
+    // const chonAnh = (hinhAnh: HinhAnhModel) => {
+    //     setHinhAnhDangChon(hinhAnh);
+    // }
 
     useEffect(() => {
         layMotAnhCuaSach(maSach).then(
             danhSach => {
                 setDanhSachAnh(danhSach);
-                if (danhSach.length > 0) {
-                    setHinhAnhDangChon(danhSach[0]);
-                }
+                // if (danhSach.length > 0) {
+                //     setHinhAnhDangChon(danhSach[0]);
+                // }
                 setDangTaiDuLieu(false);
             }
         ).catch(
@@ -63,18 +64,20 @@ const HinhAnhSanPham: React.FC<HinhAnhSanPham> = (props) => {
 
     return (
         <div className="row">
-            <div>
-                {(hinhAnhDangChon) && <img src={hinhAnhDangChon.duLieuAnh} />}
-            </div>
-                <div className="row mt-2">
+            
+            <div className="col-12">
+                <Carousel showArrows={true} showIndicators={true}> 
                     {
-                        danhSachAnh.map((hinhAnh, index) => (
-                            <div className={"col-3"} key={index}>
-                                <img onClick={() => chonAnh(hinhAnh)} src={hinhAnh.duLieuAnh} style={{ width: '50px' }} />
+                        danhSachAnh.map((hinhAnh, index)=>(
+                            <div key={index}>
+                        <img src={hinhAnh.duLieuAnh} alt="ưer" style={{ maxWidth: "500px" }} />
                             </div>
                         ))
                     }
-                </div>
+                </Carousel>
+            </div>
+             
+             
         </div>
     );
 }

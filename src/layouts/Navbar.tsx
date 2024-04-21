@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
+import { Search } from "react-bootstrap-icons";
 import { Link, NavLink } from "react-router-dom";
 
 interface NavbarProps {
@@ -69,7 +70,9 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }:NavbarProps) {
         {/* Tìm kiếm */}
         <div className="d-flex">
           <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" onChange={onSearchInputChange} value={tuKhoaTamThoi} />
-          <button className="btn btn-outline-success" type="button" onClick={handleSearch}>Tìm kiếm</button>
+          <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>
+          <Search /> </button>
+      
         </div>
 
         {/* Biểu tượng giỏ hàng */}

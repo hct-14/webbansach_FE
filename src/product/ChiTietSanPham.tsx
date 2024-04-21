@@ -6,6 +6,8 @@ import SachModel from "../models/SachModel";
 import { laySachTheoMaSach } from "../api/SachAPI";
 import HinhAnhSanPham from "./component/HinhAnhSanPham";
 import DanhGiaSanPham from "./component/DanhGiaSanPham";
+import { Star, StarFill } from "react-bootstrap-icons";
+import renderRating from "../utils/DanhGiaSao";
 
 
 const ChiTietSanPham: React.FC = () => {
@@ -66,11 +68,24 @@ const ChiTietSanPham: React.FC = () => {
       );
   }
 
+  
+//   const renderRating = (diem:number)=>{
+//     const stars = [];
+//     for(let i =1; i<=5; i++){
+//         if(i<=diem){
+//             stars.push(<StarFill key={i} className="text-warning" />);
+//         }else{
+//             stars.push(<Star key={i}  className="text-secondary" />);
+//         }
+//     }
+//     return stars;
+// }
   return (
       <div className="container">
           <div className="row mt-4 mb-4">
               <div className="col-4">
                   <HinhAnhSanPham maSach={maSachNumber}/>
+
               </div>
               <div className="col-8">
                   <div className="row">
@@ -79,7 +94,7 @@ const ChiTietSanPham: React.FC = () => {
                               {sach.tenSach}
                           </h1>
                           <h4>
-                              {sach.trungBinhXepHang}
+                              {renderRating(sach.trungBinhXepHang?sach.trungBinhXepHang:0)}
                           </h4>
                           <h4>
                               {sach.giaBan}
