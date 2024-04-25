@@ -4,6 +4,8 @@ import HinhAnhModel from "../../models/HinhAnhModel";
 import { layMotAnhCuaSach, layToanBoAnhCuaSach } from "../../api/HinhAnhAPI";
 import { error } from "console";
 import { Link } from "react-router-dom";
+import renderRating from "../../utils/DanhGiaSao";
+import dinhDangSo from "../../utils/DinhDangSo";
 
 
 interface SachPropsInterface{
@@ -72,13 +74,17 @@ const SachProps: React.FC<SachPropsInterface> = (props) => {
                         <p className="card-text">{props.sach.moTa}</p>
                    
                     <div className="price">
-                        <span className="original-price">
-                            <del>{props.sach.giaNiemYet}</del>
+                        <span className="original-price col-6 text-end" >
+                            <del>{dinhDangSo(props.sach.giaNiemYet)}</del>
                         </span>
-                        <span className="discounted-price">
-                            <strong>{props.sach.giaBan}</strong>
+                        <span className="discounted-price col-6">
+                            <strong>{dinhDangSo(props.sach.giaBan)} đ</strong>
                         </span>
+                
                     </div>
+                    <span className="discounted-price">
+                            <strong>{renderRating(props.sach.trungBinhXepHang?props.sach.trungBinhXepHang:0)}</strong>
+                        </span>
                     <div className="row mt-2" role="group">
                         <div className="col-6">
                             <a href="#" className="btn btn-secondary btn-block">
